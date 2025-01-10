@@ -4,11 +4,12 @@ require('dotenv').config();
 const authRouter=require('./routes/authRouter');
 const PORT = process.env.PORT || 3000;
 const app = express();
-
+const cors=require('cors');
 connectDB();
 
 
 app.use(express.json());
+app.use(cors());
 app.use("/auth",authRouter);
 app.get('/', (req, res) => {
   res.send('API is running...');

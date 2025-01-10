@@ -2,10 +2,7 @@ const bcrypt = require("bcrypt");
 const User=require('../models/User');
 const login = async (req, res) => {
   try {
-    
     const { email, password } = req.body;
-
-    
     const user = await User.findOne({ email });
     if (!user) return res.status(401).send("Invalid email or password");
 
@@ -31,15 +28,10 @@ const signup = async (req, res) => {
       }
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = new User({
-        fullName,
         username,
         email,
         password: hashedPassword, // Store the hashed password
         phone,
-        age,
-        gender,
-        dateOfBirth,
-        image,
       });
   
       // Save the user to the database
